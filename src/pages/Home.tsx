@@ -32,9 +32,11 @@ export function Home() {
 
     let task = updatedTasks.find(task => task.id === id)
 
-    if (task) {
-      task.done = !task.done//JS is POO
+    if (!task) {
+      return;
     }
+    
+    task.done = !task.done//JS is POO
 
     setTasks(updatedTasks)
 
