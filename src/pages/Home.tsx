@@ -10,14 +10,47 @@ export function Home() {
 
   function handleAddTask(newTaskTitle: string) {
     //TODO - add new task
+    setTasks(oldTasks => [...oldTasks, {
+      id: new Date().getTime(),
+      title: newTaskTitle,
+      done: false
+    }])
+
   }
 
   function handleToggleTaskDone(id: number) {
     //TODO - toggle task done if exists
+
+    // const updatedTasks = tasks.map(task => {//aonther way to do
+    //   if (task.id === id) {
+    //     task.done = !task.done
+    //   }
+    //   return ({...task})
+    // })
+
+    const updatedTasks = tasks.map(task => ({...task}))//JS is POO and immutability of react
+
+    let task = updatedTasks.find(task => task.id === id)
+
+    if (task) {
+      task.done = !task.done//JS is POO
+    }
+
+    setTasks(updatedTasks)
+
+    // setTasks(oldTasks => oldTasks.map(task => {//another way to do
+    //   if (task.id === id) {
+    //     task.done = !task.done
+    //   }
+
+    //   return ({...task})
+    // }))
+
   }
 
   function handleRemoveTask(id: number) {
     //TODO - remove task from state
+    setTasks(oldTasks => oldTasks.filter(task => task.id !== id))
   }
 
   return (
